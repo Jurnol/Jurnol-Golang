@@ -3,6 +3,9 @@ package database
 import (
     "testing"
     "database/sql"
+    //the underscore is the 'blank identifier' - tells go compiler that package is imported for side effects only
+    //basically tells the above package, database/sql to register this driver
+    //this also avoids the  error that a package is imported but no directly used. 
     _ "github.com/lib/pq"
 )
 
