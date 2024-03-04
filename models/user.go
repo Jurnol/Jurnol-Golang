@@ -8,3 +8,7 @@ type User struct {
 	PasswordHash string `json:"password_hash,omitempty"` // Temporarily included for completeness
 	// CreatedAt and UpdatedAt are managed by the db.
 }
+
+type UserRequest struct {
+	User User `json:"user"`
+}

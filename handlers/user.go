@@ -12,7 +12,7 @@ import (
 
 func CreateUserHandler(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var newUser models.User
+		var newUser models.UserRequest
 		err := json.NewDecoder(r.Body).Decode(&newUser)
 
 		if err != nil {
@@ -21,7 +21,7 @@ func CreateUserHandler(db *sql.DB) http.HandlerFunc {
 		}
 
 		query := `INSERT INTO users (first_name, last_name, email, password_hash) VALUES ($1, $2, $3, $4)`
-		_, err = db.Exec(query, newUser.FirstName, newUser.LastName, newUser.Email, newUser.PasswordHash) 
+		_, err = db.Exec(query, newUser.User.FirstName, newUser.User.LastName, newUser.User.Email, newUser.User.PasswordHash) 
 		if err != nil {
 			log.Printf("Failed to insert new user: %v", err)
 			http.Error(w, "failed to create new user", http.StatusInternalServerError)
